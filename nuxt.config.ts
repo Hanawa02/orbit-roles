@@ -1,3 +1,6 @@
+import { paraglide } from "@inlang/paraglide-vite";
+import { fileURLToPath, URL } from "node:url";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
@@ -26,5 +29,16 @@ export default defineNuxtConfig({
         cookieName: process.env.SUPABASE_COOKIE_NAME,
       },
     },
+  },
+  alias: {
+    translations: "./src/i18n/generated/messages.js",
+  },
+  vite: {
+    plugins: [
+      paraglide({
+        project: "./project.inlang",
+        outdir: "./src/i18n/generated",
+      }),
+    ],
   },
 });
