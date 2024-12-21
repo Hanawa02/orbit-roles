@@ -3,12 +3,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "paraglide-js compile --project ./project.inlang --outdir ./src/i18n/generated && nuxt build",
+    "build": "paraglide-js compile --project ./project.inlang --outdir ./i18n/generated && nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "paraglide-js compile --project ./project.inlang --outdir ./src/i18n/generated && nuxt prepare",
-    "i18n": "paraglide-js compile --project ./project.inlang --outdir ./src/i18n/generated"
+    "postinstall": "paraglide-js compile --project ./project.inlang --outdir ./i18n/generated && nuxt prepare",
+    "i18n": "paraglide-js compile --project ./project.inlang --outdir ./i18n/generated"
   },
   "dependencies": {
     "@inlang/paraglide-vite": "^1.3.0",
