@@ -31,6 +31,7 @@ export default defineNuxtConfig({
     },
   },
   alias: {
+    // This automatically includes the alias for TS config
     translations: "./src/i18n/generated/messages.js",
   },
   vite: {
