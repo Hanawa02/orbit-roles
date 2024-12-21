@@ -1,6 +1,6 @@
 <template>
   <form @submit="onSubmit">
-    <FormField v-slot="{ componentField }" name="display_name">
+    <FormField v-slot="{ componentField }" name="displayName">
       <FormItem>
         <FormLabel>Display Name</FormLabel>
         <FormControl>
@@ -44,7 +44,7 @@
         <FormMessage />
       </FormItem>
     </FormField>
-    <Button type="submit">Sign Up</Button>
+    <Button type="submit" class="mt-6">Sign Up</Button>
   </form>
 </template>
 
@@ -66,7 +66,7 @@ import { Input } from "@/components/ui/input";
 
 const formSchema = toTypedSchema(
   z.object({
-    dispalyName: z.string().min(2).max(50),
+    displayName: z.string().min(2).max(50),
     email: z.string().email(),
     password: z.string().min(8).max(32),
   })
@@ -77,17 +77,15 @@ const form = useForm({
 });
 
 const supabase = useSupabaseClient();
-const onSubmit = form.handleSubmit((values) => {
-  console.log("Form submitted!", values);
-  //signUpUser(values.email, values.password, values.displayName);
-});
 
-const signUpUser = async (
-  email: string,
-  password: string,
-  displayName: string
-) => {
-  const { error } = await supabase.auth.signUp({
+type SignupForm = {
+  email: string;
+  password: string;
+  displayName: string;
+};
+
+const signUpUser = async ({ email, password, displayName }: SignupForm) => {
+  const { error, data } = await supabase.auth.signUp({
     email: email,
     password: password,
     options: {
@@ -96,6 +94,11 @@ const signUpUser = async (
       },
     },
   });
+  if (data) console.log(data);
   if (error) console.log(error);
 };
+
+const onSubmit = form.handleSubmit(signUpUser, (errors) => {
+  console.log("Form errors!", errors);
+});
 </script>
