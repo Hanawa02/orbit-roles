@@ -2,49 +2,51 @@
   <form @submit="onSubmit">
     <FormField v-slot="{ componentField }" name="displayName">
       <FormItem>
-        <FormLabel>Display Name</FormLabel>
+        <FormLabel>{{ signup_form_display_name_label() }}</FormLabel>
         <FormControl>
           <Input
             type="text"
-            placeholder="Ada Lovelace"
+            :placeholder="signup_form_display_name_placeholder()"
             v-bind="componentField"
           />
         </FormControl>
-        <FormDescription>This is your public display name.</FormDescription>
+        <FormDescription>
+          {{ signup_form_display_name_description() }}
+        </FormDescription>
         <FormMessage />
       </FormItem>
     </FormField>
     <FormField v-slot="{ componentField }" name="email">
       <FormItem>
-        <FormLabel>E-mail</FormLabel>
+        <FormLabel>{{ signup_form_email_label() }}</FormLabel>
         <FormControl>
           <Input
             type="text"
-            placeholder="ada.lovelace@gmail.com"
+            :placeholder="signup_form_email_placeholder()"
             v-bind="componentField"
           />
         </FormControl>
-        <FormDescription>This is your e-mail used for login.</FormDescription>
+        <FormDescription>{{ signup_form_email_description() }}</FormDescription>
         <FormMessage />
       </FormItem>
     </FormField>
     <FormField v-slot="{ componentField }" name="password">
       <FormItem>
-        <FormLabel>Password</FormLabel>
+        <FormLabel>{{ signup_form_password_label() }}></FormLabel>
         <FormControl>
           <Input
             type="password"
-            placeholder="make it safe!"
+            :placeholder="signup_form_password_placeholder()"
             v-bind="componentField"
           />
         </FormControl>
         <FormDescription>
-          This is your password needed for login.
+          {{ signup_form_password_description() }}
         </FormDescription>
         <FormMessage />
       </FormItem>
     </FormField>
-    <Button type="submit" class="mt-6">Sign Up</Button>
+    <Button type="submit" class="mt-6">{{ signup_form_button() }}</Button>
   </form>
 </template>
 
@@ -52,6 +54,19 @@
 import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import * as z from "zod";
+
+import {
+  signup_form_email_label,
+  signup_form_email_placeholder,
+  signup_form_password_label,
+  signup_form_password_placeholder,
+  signup_form_button,
+  signup_form_display_name_label,
+  signup_form_display_name_description,
+  signup_form_display_name_placeholder,
+  signup_form_email_description,
+  signup_form_password_description,
+} from "translations";
 
 import { Button } from "~/components/ui/button";
 import {
