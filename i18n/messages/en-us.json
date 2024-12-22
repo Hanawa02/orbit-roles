@@ -1,6 +1,8 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
 
+  "date_picker_default_placeholder": "Select a date",
+
   "login_headline": "Login",
   "login_signup_link": "Don't have an account yet? Sign up here!",
   "login_form_email_label": "E-mail",
