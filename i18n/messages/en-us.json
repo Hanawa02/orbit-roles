@@ -1,6 +1,13 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
 
+  "unit_minute": "minute(s)",
+  "unit_hour": "hour(s)",
+  "unit_day": "day(s)",
+  "unit_week": "week(s)",
+  "unit_month": "month(s)",
+  "unit_year": "year(s)",
+
   "date_picker_default_placeholder": "Select a date",
 
   "login_headline": "Login",
