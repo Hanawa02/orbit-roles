@@ -3,7 +3,7 @@
     <FormItem
       class="flex flex-row items-center justify-between rounded-lg border p-4"
     >
-      <div class="space-y-0.5">
+      <div class="space-y-0.5 pr-4">
         <FormLabel class="text-base">
           <slot name="label" />
         </FormLabel>
