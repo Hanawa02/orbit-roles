@@ -1,32 +1,28 @@
 <template>
-  <form @submit="onSubmit">
-    <FormField v-slot="{ componentField }" name="email">
-      <FormItem>
-        <FormLabel>{{ login_form_email_label() }}</FormLabel>
-        <FormControl>
-          <Input
-            type="text"
-            :placeholder="login_form_email_placeholder()"
-            v-bind="componentField"
-          />
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    </FormField>
-    <FormField v-slot="{ componentField }" name="password">
-      <FormItem>
-        <FormLabel>{{ login_form_password_label() }}</FormLabel>
-        <FormControl>
-          <Input
-            type="password"
-            :placeholder="login_form_password_placeholder()"
-            v-bind="componentField"
-          />
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    </FormField>
-    <Button type="submit" class="mt-6">{{ login_form_button() }}</Button>
+  <form @submit="onSubmit" class="flex flex-col gap-4">
+    <InputFormField
+      class="pb-4"
+      name="email"
+      type="email"
+      :placeholder="login_form_email_placeholder()"
+    >
+      <template v-slot:label>
+        {{ login_form_email_label() }}
+      </template>
+    </InputFormField>
+
+    <InputFormField
+      class="mb-4"
+      name="password"
+      type="password"
+      :placeholder="login_form_password_placeholder()"
+    >
+      <template v-slot:label>
+        {{ login_form_password_label() }}
+      </template>
+    </InputFormField>
+
+    <Button type="submit">{{ login_form_button() }}</Button>
   </form>
 </template>
 
@@ -45,14 +41,7 @@ import {
 import * as z from "zod";
 
 import { Button } from "~/components/ui/button";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
+import InputFormField from "~/components/ui/InputFormField.vue";
 
 const formSchema = toTypedSchema(
   z.object({

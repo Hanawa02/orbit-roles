@@ -1,52 +1,45 @@
 <template>
-  <form @submit="onSubmit">
-    <FormField v-slot="{ componentField }" name="displayName">
-      <FormItem>
-        <FormLabel>{{ signup_form_display_name_label() }}</FormLabel>
-        <FormControl>
-          <Input
-            type="text"
-            :placeholder="signup_form_display_name_placeholder()"
-            v-bind="componentField"
-          />
-        </FormControl>
-        <FormDescription>
+  <form @submit="onSubmit" class="flex flex-col gap-4">
+    <InputFormField
+      name="displayName"
+      type="text"
+      :placeholder="signup_form_display_name_placeholder()"
+    >
+      <template v-slot:label>
+        {{ signup_form_display_name_label() }}
+        <InfoTooltip>
           {{ signup_form_display_name_description() }}
-        </FormDescription>
-        <FormMessage />
-      </FormItem>
-    </FormField>
-    <FormField v-slot="{ componentField }" name="email">
-      <FormItem>
-        <FormLabel>{{ signup_form_email_label() }}</FormLabel>
-        <FormControl>
-          <Input
-            type="text"
-            :placeholder="signup_form_email_placeholder()"
-            v-bind="componentField"
-          />
-        </FormControl>
-        <FormDescription>{{ signup_form_email_description() }}</FormDescription>
-        <FormMessage />
-      </FormItem>
-    </FormField>
-    <FormField v-slot="{ componentField }" name="password">
-      <FormItem>
-        <FormLabel>{{ signup_form_password_label() }}></FormLabel>
-        <FormControl>
-          <Input
-            type="password"
-            :placeholder="signup_form_password_placeholder()"
-            v-bind="componentField"
-          />
-        </FormControl>
-        <FormDescription>
+        </InfoTooltip>
+      </template>
+    </InputFormField>
+
+    <InputFormField
+      name="email"
+      type="email"
+      :placeholder="signup_form_email_placeholder()"
+    >
+      <template v-slot:label>
+        {{ signup_form_email_label() }}
+        <InfoTooltip>
+          {{ signup_form_email_description() }}
+        </InfoTooltip>
+      </template>
+    </InputFormField>
+
+    <InputFormField
+      name="password"
+      type="password"
+      :placeholder="signup_form_password_placeholder()"
+    >
+      <template v-slot:label>
+        {{ signup_form_password_label() }}
+        <InfoTooltip>
           {{ signup_form_password_description() }}
-        </FormDescription>
-        <FormMessage />
-      </FormItem>
-    </FormField>
-    <Button type="submit" class="mt-6">{{ signup_form_button() }}</Button>
+        </InfoTooltip>
+      </template>
+    </InputFormField>
+
+    <Button type="submit">{{ signup_form_button() }}</Button>
   </form>
 </template>
 
@@ -69,15 +62,8 @@ import {
 } from "translations";
 
 import { Button } from "~/components/ui/button";
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
+import InputFormField from "~/components/ui/InputFormField.vue";
+import InfoTooltip from "~/components/ui/InfoTooltip.vue";
 
 const formSchema = toTypedSchema(
   z.object({
