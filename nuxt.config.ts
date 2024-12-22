@@ -33,6 +33,8 @@ export default defineNuxtConfig({
   alias: {
     // This automatically includes the alias for TS config
     translations: "./i18n/generated/messages.js",
+    // Alias for easy import of icons
+    icons: "./node_modules/vue-material-design-icons",
   },
   vite: {
     plugins: [

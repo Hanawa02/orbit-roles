@@ -18,5 +18,5 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "~/components/ui/tooltip";
-import InfoIcon from "~/node_modules/vue-material-design-icons/Information.vue";
+import InfoIcon from "icons/Information.vue";
 </script>
