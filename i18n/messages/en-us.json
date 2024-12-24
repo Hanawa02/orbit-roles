@@ -10,6 +10,9 @@
 
   "date_picker_default_placeholder": "Select a date",
 
+  "fancy_calendar_select_month": "Select a month",
+  "fancy_calendar_select_year": "Select a year",
+
   "login_headline": "Login",
   "login_signup_link": "Don't have an account yet? Sign up here!",
   "login_form_email_label": "E-mail",
