@@ -6,7 +6,6 @@
     :class="cn('rounded-md border p-3', props.class)"
   >
     <CalendarHeader>
-      {{ placeholder.value }}
       <CalendarHeading class="flex w-full items-center justify-between gap-2">
         <Select
           :default-value="placeholder.month.toString()"
