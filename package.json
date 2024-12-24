@@ -8,7 +8,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "paraglide-js compile --project ./project.inlang --outdir ./i18n/generated && nuxt prepare",
-    "i18n": "paraglide-js compile --project ./project.inlang --outdir ./i18n/generated"
+    "i18n": "paraglide-js compile --project ./project.inlang --outdir ./i18n/generated",
+    "codegen": "npx supabase gen types --lang=typescript --project-id $PROJECT_ID > types/database.types.ts"
   },
   "dependencies": {
     "@inlang/paraglide-vite": "^1.3.0",

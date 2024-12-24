@@ -20,6 +20,17 @@ yarn install
 bun install
 ```
 
+## Generating DB Types
+
+1. Export the project id:
+
+```bash
+export PROJECT_ID="myProjectId"
+```
+
+2. Run `npm run codegen`
+
+
 ## Development Server
 
 Start the development server on `http://localhost:3000`:

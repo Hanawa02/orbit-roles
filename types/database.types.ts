@@ -106,9 +106,11 @@ export type Database = {
         Row: {
           created_at: string
           description: string | null
-          duration_min: number | null
+          duration_unit: Database["public"]["Enums"]["frequency_units"] | null
+          duration_value: number | null
           end_date: string | null
-          frequency_cron: string | null
+          frequency_unit: Database["public"]["Enums"]["frequency_units"] | null
+          frequency_value: number | null
           id: string
           invite_all: boolean | null
           name: string | null
@@ -117,9 +119,11 @@ export type Database = {
         Insert: {
           created_at?: string
           description?: string | null
-          duration_min?: number | null
+          duration_unit?: Database["public"]["Enums"]["frequency_units"] | null
+          duration_value?: number | null
           end_date?: string | null
-          frequency_cron?: string | null
+          frequency_unit?: Database["public"]["Enums"]["frequency_units"] | null
+          frequency_value?: number | null
           id?: string
           invite_all?: boolean | null
           name?: string | null
@@ -128,9 +132,11 @@ export type Database = {
         Update: {
           created_at?: string
           description?: string | null
-          duration_min?: number | null
+          duration_unit?: Database["public"]["Enums"]["frequency_units"] | null
+          duration_value?: number | null
           end_date?: string | null
-          frequency_cron?: string | null
+          frequency_unit?: Database["public"]["Enums"]["frequency_units"] | null
+          frequency_value?: number | null
           id?: string
           invite_all?: boolean | null
           name?: string | null
@@ -146,7 +152,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      frequency_units: "minute" | "hour" | "day" | "week" | "month" | "year"
     }
     CompositeTypes: {
       [_ in never]: never
