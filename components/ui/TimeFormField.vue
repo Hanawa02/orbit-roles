@@ -50,8 +50,9 @@ type Props = {
 defineProps<Props>();
 
 const timeOptions = computed<Option[]>(() => [
-  { label: unit_minute(), value: "minute" },
-  { label: unit_hour(), value: "hour" },
+  // disabled for now because of the date picker missing time
+  // { label: unit_minute(), value: "minute" },
+  // { label: unit_hour(), value: "hour" },
   { label: unit_day(), value: "day" },
   { label: unit_week(), value: "week" },
   { label: unit_month(), value: "month" },
