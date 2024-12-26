@@ -12,21 +12,21 @@ export type Database = {
       event_members: {
         Row: {
           created_at: string
-          event_id: string | null
+          event_id: string
           id: string
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           created_at?: string
-          event_id?: string | null
+          event_id: string
           id?: string
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           created_at?: string
-          event_id?: string | null
+          event_id?: string
           id?: string
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: [
           {
@@ -41,27 +41,27 @@ export type Database = {
       events: {
         Row: {
           created_at: string
-          end_date: string | null
+          end_date: string
           id: string
-          name: string | null
-          role_id: string | null
-          start_date: string | null
+          name: string
+          role_id: string
+          start_date: string
         }
         Insert: {
           created_at?: string
-          end_date?: string | null
+          end_date: string
           id?: string
-          name?: string | null
-          role_id?: string | null
-          start_date?: string | null
+          name: string
+          role_id: string
+          start_date: string
         }
         Update: {
           created_at?: string
-          end_date?: string | null
+          end_date?: string
           id?: string
-          name?: string | null
-          role_id?: string | null
-          start_date?: string | null
+          name?: string
+          role_id?: string
+          start_date?: string
         }
         Relationships: [
           {
@@ -77,20 +77,23 @@ export type Database = {
         Row: {
           created_at: string
           id: string
-          role_id: string | null
-          user_id: string | null
+          role_id: string
+          type: Database["public"]["Enums"]["role_member_type"]
+          user_id: string
         }
         Insert: {
           created_at?: string
           id?: string
-          role_id?: string | null
-          user_id?: string | null
+          role_id: string
+          type: Database["public"]["Enums"]["role_member_type"]
+          user_id: string
         }
         Update: {
           created_at?: string
           id?: string
-          role_id?: string | null
-          user_id?: string | null
+          role_id?: string
+          type?: Database["public"]["Enums"]["role_member_type"]
+          user_id?: string
         }
         Relationships: [
           {
@@ -106,41 +109,62 @@ export type Database = {
         Row: {
           created_at: string
           description: string | null
-          duration_unit: Database["public"]["Enums"]["frequency_units"] | null
-          duration_value: number | null
+          duration_unit: Database["public"]["Enums"]["time_units"]
+          duration_value: number
           end_date: string | null
-          frequency_unit: Database["public"]["Enums"]["frequency_units"] | null
-          frequency_value: number | null
+          frequency_unit: Database["public"]["Enums"]["time_units"]
+          frequency_value: number
           id: string
-          invite_all: boolean | null
-          name: string | null
-          start_date: string | null
+          invite_all: boolean
+          name: string
+          start_date: string
         }
         Insert: {
           created_at?: string
           description?: string | null
-          duration_unit?: Database["public"]["Enums"]["frequency_units"] | null
-          duration_value?: number | null
+          duration_unit: Database["public"]["Enums"]["time_units"]
+          duration_value: number
           end_date?: string | null
-          frequency_unit?: Database["public"]["Enums"]["frequency_units"] | null
-          frequency_value?: number | null
+          frequency_unit: Database["public"]["Enums"]["time_units"]
+          frequency_value: number
           id?: string
-          invite_all?: boolean | null
-          name?: string | null
-          start_date?: string | null
+          invite_all?: boolean
+          name: string
+          start_date: string
         }
         Update: {
           created_at?: string
           description?: string | null
-          duration_unit?: Database["public"]["Enums"]["frequency_units"] | null
-          duration_value?: number | null
+          duration_unit?: Database["public"]["Enums"]["time_units"]
+          duration_value?: number
           end_date?: string | null
-          frequency_unit?: Database["public"]["Enums"]["frequency_units"] | null
-          frequency_value?: number | null
+          frequency_unit?: Database["public"]["Enums"]["time_units"]
+          frequency_value?: number
           id?: string
-          invite_all?: boolean | null
-          name?: string | null
-          start_date?: string | null
+          invite_all?: boolean
+          name?: string
+          start_date?: string
+        }
+        Relationships: []
+      }
+      user_connections: {
+        Row: {
+          connected_to_user_id: string
+          created_at: string
+          id: number
+          user_id: string
+        }
+        Insert: {
+          connected_to_user_id: string
+          created_at?: string
+          id?: number
+          user_id: string
+        }
+        Update: {
+          connected_to_user_id?: string
+          created_at?: string
+          id?: number
+          user_id?: string
         }
         Relationships: []
       }
@@ -152,7 +176,8 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      frequency_units: "minute" | "hour" | "day" | "week" | "month" | "year"
+      role_member_type: "admin" | "manager" | "member"
+      time_units: "minute" | "hour" | "day" | "week" | "month" | "year"
     }
     CompositeTypes: {
       [_ in never]: never

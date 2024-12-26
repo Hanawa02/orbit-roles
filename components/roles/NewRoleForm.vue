@@ -84,9 +84,11 @@
 </template>
 
 <script setup lang="ts">
-import { useForm } from "vee-validate";
+import { useForm, type InvalidSubmissionContext } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import * as z from "zod";
+
+import { useRoles, type InsertRole } from "~/composables/roles";
 
 import {
   roles_new_form_description_label,
@@ -108,13 +110,14 @@ import {
   roles_new_form_button,
 } from "translations";
 
-import { Button } from "~/components/ui/button";
 
+import { Button } from "~/components/ui/button";
 import InputFormField from "~/components/ui/InputFormField.vue";
 import DatePickerFormField from "~/components/ui/DatePickerFormField.vue";
 import InfoTooltip from "~/components/ui/InfoTooltip.vue";
 import SwitchFormField from "~/components/ui/SwitchFormField.vue";
 import TimeFormField from "~/components/ui/TimeFormField.vue";
+import type { TimeUnit } from "~/types/database.enums";
 
 const formSchema = toTypedSchema(
   z.object({
@@ -130,6 +133,8 @@ const formSchema = toTypedSchema(
   })
 );
 
+const user = useSupabaseUser();
+
 const form = useForm({
   validationSchema: formSchema,
   initialValues: {
@@ -141,54 +146,36 @@ const form = useForm({
   },
 });
 
-const onSubmit = form.handleSubmit(
-  () => {
-    addRole();
-  },
-  (errors) => {
-    console.error("Form errors!", errors);
-  }
-);
+const { addRole, addMembersToRole } = useRoles();
 
-const user = useSupabaseUser();
-
-const addRole = async () => {
-  const client = useSupabaseClient();
-
-  const { data, error } = await client
-    .from("roles")
-    .insert({
-      name: form.values.name ?? null,
-      description: form.values.description,
-      start_date: form.values.startDate?.toUTCString() ?? null,
-      end_date: form.values.endDate?.toUTCString() ?? null,
-      invite_all: form.values.inviteAll,
-      frequency_unit: form.values.frequencyUnit,
-      frequency_value: form.values.frequencyValue,
-      duration_unit: form.values.durationUnit,
-      duration_value: form.values.durationValue ?? 1,
-    })
-    .select();
-
-  if (data) {
-    addMemberToRole(data[0].id);
-  }
+const parseRoleFromForm = (): InsertRole => {
+  return {
+    name: form.values.name ?? "",
+    description: form.values.description,
+    start_date: form.values.startDate?.toUTCString(),
+    end_date: form.values.endDate?.toUTCString(),
+    invite_all: form.values.inviteAll,
+    frequency_unit: form.values.frequencyUnit as TimeUnit,
+    frequency_value: form.values.frequencyValue ?? 1,
+    duration_unit: form.values.durationUnit as TimeUnit,
+    duration_value: form.values.durationValue ?? 1,
+  };
 };
 
-const addMemberToRole = async (role_id: string) => {
-  const client = useSupabaseClient();
+const createRole = async () => {
+  const { data } = await addRole(parseRoleFromForm());
 
+  const roleId = data?.[0].id;
   const userId = user.value?.id;
-  if (!userId) {
-    return;
-  }
 
-  const { data, error } = await client
-    .from("role_members")
-    .insert({
-      role_id,
-      user_id: userId,
-    })
-    .select();
+  if (roleId && userId) {
+    await addMembersToRole(roleId, [{ id: userId, type: "admin" }]);
+  }
 };
+
+const handleErrors = (errors: InvalidSubmissionContext) => {
+  console.error("Form errors!", errors);
+};
+
+const onSubmit = form.handleSubmit(createRole, handleErrors);
 </script>
