@@ -1,10 +1,6 @@
 <template>
   <form @submit="onSubmit" class="flex flex-col gap-4">
-    <InputFormField
-      name="name"
-      type="text"
-      :placeholder="roles_new_form_name_placeholder()"
-    >
+    <InputFormField name="name" type="text" :placeholder="roles_new_form_name_placeholder()">
       <template v-slot:label>
         {{ roles_new_form_name_label() }}
         <InfoTooltip>
@@ -13,11 +9,7 @@
       </template>
     </InputFormField>
 
-    <InputFormField
-      name="description"
-      type="text"
-      :placeholder="roles_new_form_description_placeholder()"
-    >
+    <InputFormField name="description" type="text" :placeholder="roles_new_form_description_placeholder()">
       <template v-slot:label>
         {{ roles_new_form_description_label() }}
         <InfoTooltip>
@@ -76,8 +68,8 @@
         {{ roles_new_form_invite_all_description() }}
       </template>
     </SwitchFormField>
-    <pre>{{ members }}</pre>
-    <MembersSelectorTable v-model="members"></MembersSelectorTable>
+
+    <MembersTable v-model="members" :roleName="form.values.name"></MembersTable>
 
     <Button type="submit" class="mt-6 sticky bottom-0">
       {{ roles_new_form_button() }}
@@ -112,9 +104,9 @@ import {
   roles_new_form_button,
 } from "translations";
 
-import MembersSelectorTable, {
+import MembersTable, {
   type RoleMember,
-} from "~/components/roles/MembersSelectorTable.vue";
+} from "~/components/roles/MembersTable.vue";
 
 import { Button } from "~/components/ui/button";
 import InputFormField from "~/components/ui/InputFormField.vue";
@@ -145,12 +137,14 @@ const members = ref<RoleMember[]>(
     ? [
         {
           id: user.value?.id,
-          displayName: user.value?.user_metadata.displayName,
+          name: user.value?.user_metadata.displayName,
+          email: user.value?.email,
           type: "admin",
         },
         {
           id: "bla",
-          displayName: "Bla",
+          name: "Bla",
+          email: "bla@bla.com",
           type: "manager",
         },
       ]
