@@ -7,9 +7,7 @@
 
     <h2 class="mt-8">Role List</h2>
     <ul v-if="roles">
-      <li v-for="role in roles" :key="role?.id">
-        {{ role?.name }} | {{ role?.start_date }}
-      </li>
+      <li v-for="role in roles" :key="role?.id">{{ role?.name }} | {{ role?.start_date }}</li>
     </ul>
   </section>
 </template>
@@ -26,7 +24,7 @@ const { data: roles } = await useAsyncData("roles", async () => {
   const { data } = await client
     .from("role_members")
     .select("id, roles:role_id(*)")
-    .eq("user_id", user.value.id)
+    .eq("email", user.value.email)
     .order("created_at");
 
   return data?.map((role) => role.roles);
