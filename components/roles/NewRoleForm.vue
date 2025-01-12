@@ -76,6 +76,8 @@
         {{ roles_new_form_invite_all_description() }}
       </template>
     </SwitchFormField>
+    <pre>{{ members }}</pre>
+    <MembersSelectorTable v-model="members"></MembersSelectorTable>
 
     <Button type="submit" class="mt-6 sticky bottom-0">
       {{ roles_new_form_button() }}
@@ -110,6 +112,9 @@ import {
   roles_new_form_button,
 } from "translations";
 
+import MembersSelectorTable, {
+  type RoleMember,
+} from "~/components/roles/MembersSelectorTable.vue";
 
 import { Button } from "~/components/ui/button";
 import InputFormField from "~/components/ui/InputFormField.vue";
@@ -134,6 +139,23 @@ const formSchema = toTypedSchema(
 );
 
 const user = useSupabaseUser();
+
+const members = ref<RoleMember[]>(
+  user.value
+    ? [
+        {
+          id: user.value?.id,
+          displayName: user.value?.user_metadata.displayName,
+          type: "admin",
+        },
+        {
+          id: "bla",
+          displayName: "Bla",
+          type: "manager",
+        },
+      ]
+    : []
+);
 
 const form = useForm({
   validationSchema: formSchema,
@@ -169,7 +191,7 @@ const createRole = async () => {
   const userId = user.value?.id;
 
   if (roleId && userId) {
-    await addMembersToRole(roleId, [{ id: userId, type: "admin" }]);
+    await addMembersToRole(roleId, members.value);
   }
 };
 

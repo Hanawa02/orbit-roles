@@ -86,3 +86,25 @@ bun run preview
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
 
+## Packages/Stack
+
+- Supabase backend
+- nuxt module for supabase
+- [x] Tailwind
+- [x] Localization
+- [ ] Prettier
+- [ ] EsLint
+- [ ] Storybook (docs + test)
+
+
+## Features (in order of importance)
+
+- [ ] Manage Roles
+  - [ ] Invite/Add people
+- [ ] Auto-generate events
+- [ ] Events visualization
+  - [ ] List
+  - [ ] Calendar
+- [ ] Sync with Calendar providers
+  - [ ] Outlook
+  - [ ] Google
