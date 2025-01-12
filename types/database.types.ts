@@ -79,21 +79,18 @@ export type Database = {
           id: string
           role_id: string
           type: Database["public"]["Enums"]["role_member_type"]
-          user_id: string
         }
         Insert: {
           created_at?: string
           id?: string
           role_id: string
           type: Database["public"]["Enums"]["role_member_type"]
-          user_id: string
         }
         Update: {
           created_at?: string
           id?: string
           role_id?: string
           type?: Database["public"]["Enums"]["role_member_type"]
-          user_id?: string
         }
         Relationships: [
           {
@@ -144,27 +141,6 @@ export type Database = {
           invite_all?: boolean
           name?: string
           start_date?: string
-        }
-        Relationships: []
-      }
-      user_connections: {
-        Row: {
-          connected_to_user_id: string
-          created_at: string
-          id: number
-          user_id: string
-        }
-        Insert: {
-          connected_to_user_id: string
-          created_at?: string
-          id?: number
-          user_id: string
-        }
-        Update: {
-          connected_to_user_id?: string
-          created_at?: string
-          id?: number
-          user_id?: string
         }
         Relationships: []
       }
