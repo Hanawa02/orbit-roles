@@ -7,18 +7,18 @@ Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduct
 Make sure to install dependencies:
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
+
+Copy `.template.env` to `.local.env` or `.env`.
+
+Go to your [Supabase dashboard](https://supabase.com/dashboard) and select your project to get the needed env variables.
+
+- Click on Connect
+  ![Click on Connect](readme/click_on_connect.png)
+- Select App Frameworks and `Nuxt` as a Framework
+  ![SelectFramework ](readme/select_framework.png)
+- Copy variables to `.env`
 
 ## Generating DB Types
 
@@ -30,23 +30,12 @@ export PROJECT_ID="myProjectId"
 
 2. Run `npm run codegen`
 
-
 ## Development Server
 
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
 ## Production
@@ -54,37 +43,16 @@ bun run dev
 Build the application for production:
 
 ```bash
-# npm
 npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
 
 Locally preview production build:
 
 ```bash
-# npm
 npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
-
 
 ## Packages/Stack
 
@@ -96,6 +64,10 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 - [ ] EsLint
 - [ ] Storybook (docs + test)
 
+## Document
+
+- [ ] How to setup Supabase project based on database types file (terraform/orm db)
+- [ ]
 
 ## Features (in order of importance)
 
