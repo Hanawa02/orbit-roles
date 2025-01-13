@@ -7,7 +7,9 @@
 
     <h2 class="mt-8">Role List</h2>
     <ul v-if="roles">
-      <li v-for="role in roles" :key="role?.id">{{ role?.name }} | {{ role?.start_date }}</li>
+      <li v-for="role in roles" :key="role?.id">
+        <NuxtLink :to="`/roles/${role.id}`"> {{ role?.name }}</NuxtLink>
+      </li>
     </ul>
   </section>
 </template>

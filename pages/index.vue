@@ -5,7 +5,7 @@
   </section>
   <section>Hello, {{ user?.user_metadata.displayName }}</section>
 
-  <NuxtLink to="/roles">Roles</NuxtLink>
+  <NuxtLink to="/roles" class="underline">Roles</NuxtLink>
   <button @click="logout">Logout</button>
 </template>
 

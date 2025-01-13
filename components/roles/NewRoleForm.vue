@@ -120,7 +120,7 @@ const formSchema = toTypedSchema(
   z.object({
     name: z.string().min(2).max(50),
     description: z.string().max(255),
-    startDate: z.any(),
+    startDate: z.date(),
     endDate: z.date().optional().nullable(),
     frequencyValue: z.number().min(1),
     frequencyUnit: z.string(),
@@ -136,16 +136,10 @@ const members = ref<RoleMember[]>(
   user.value
     ? [
         {
-          id: user.value?.id,
-          name: user.value?.user_metadata.displayName,
-          email: user.value?.email,
+          id: user.value.id,
+          name: user.value.user_metadata.displayName,
+          email: user.value.email,
           type: "admin",
-        },
-        {
-          id: "bla",
-          name: "Bla",
-          email: "bla@bla.com",
-          type: "manager",
         },
       ]
     : []
@@ -178,14 +172,18 @@ const parseRoleFromForm = (): InsertRole => {
   };
 };
 
+const router = useRouter()
 const createRole = async () => {
   const { data } = await addRole(parseRoleFromForm());
 
   const roleId = data?.[0].id;
-  const userId = user.value?.id;
 
-  if (roleId && userId) {
-    await addMembersToRole(roleId, members.value);
+  if (roleId) {
+    const { data: membersData} = await addMembersToRole(roleId, members.value);
+
+    if (membersData) {
+      router.push("/roles");
+    }
   }
 };
 
